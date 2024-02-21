@@ -68,7 +68,7 @@ SELECT COUNT(*) FROM matches WHERE ftr = 'D' AND division_code = 'N1' AND season
 9) Select the matches played in the Premier League in order of total goals scored (`fthg` + `ftag`) from highest to lowest. When two matches have the same total the match with more home goals (`fthg`) should come first. 
 
 ```sql
-SELECT * FROM matches WHERE division_code = 'E0' ORDER BY (fthg+ftag) DESC;
+SELECT * FROM matches WHERE division_code = 'E0' ORDER BY (fthg+ftag) DESC, fthg DESC;
 
 ```
 
@@ -77,6 +77,9 @@ SELECT * FROM matches WHERE division_code = 'E0' ORDER BY (fthg+ftag) DESC;
 ```sql
 SELECT division_code, season FROM matches GROUP BY (division_code, season) ORDER BY (fthg+ftag) DESC;
 
+
+SELECT division_code,season FROM matches GROUP BY (division_code,season) ORDER BY SUM(fthg + ftag) DESC LIMIT 1
+SELECT name FROM divisions WHERE code = 'EC'
 
 ```
 
